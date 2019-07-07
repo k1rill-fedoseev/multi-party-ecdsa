@@ -99,12 +99,17 @@ fn main() {
 
     //////////////////////////////////////////////////////////////////////////////
     //signup:
-    let party_i_signup_result = signup(&client);
+    let party_i_signup_result = signup(&client, message.clone());
     assert!(party_i_signup_result.is_ok());
     let party_i_signup = party_i_signup_result.unwrap();
     println!("{:?}", party_i_signup.clone());
     let party_num_int = party_i_signup.number.clone();
     let uuid = party_i_signup.uuid;
+
+    if party_num_int > THRESHOLD + 1 {
+        println!("Already enough signers");
+        std::process::exit(0);
+    }
 
     //////////////////////////////////////////////////////////////////////////////
     // round 0: collect signers IDs
@@ -573,11 +578,11 @@ where
     None
 }
 
-pub fn signup(client: &Client) -> Result<(PartySignup), ()> {
+pub fn signup(client: &Client, message: &[u8]) -> Result<(PartySignup), ()> {
     let key = TupleKey {
         first: "signup".to_string(),
         second: "sign".to_string(),
-        third: "".to_string(),
+        third: hex::encode(message.to_vec()).to_string(),
         fourth: "".to_string(),
     };
 
