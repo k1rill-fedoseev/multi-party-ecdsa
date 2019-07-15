@@ -111,6 +111,11 @@ fn main() {
         std::process::exit(0);
     }
 
+    if party_num_int == 0 {
+        println!("Already signed up. Exiting with error");
+        std::process::exit(123);
+    }
+
     //////////////////////////////////////////////////////////////////////////////
     // round 0: collect signers IDs
     assert!(broadcast(
