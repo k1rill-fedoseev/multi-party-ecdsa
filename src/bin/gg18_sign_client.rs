@@ -135,6 +135,8 @@ fn main() {
         uuid.clone(),
     );
 
+    println!("Got all party ids");
+
     let mut j = 0;
     let mut signers_vec: Vec<usize> = Vec::new();
     for i in 1..THRESHOLD + 2 {
