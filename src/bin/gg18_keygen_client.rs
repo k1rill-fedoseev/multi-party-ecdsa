@@ -119,6 +119,8 @@ fn main() {
         uuid.clone(),
     );
 
+    println!("Got all party signups");
+
     let mut j = 0;
     let bc1_vec = (1..PARTIES + 1)
         .map(|i| {
